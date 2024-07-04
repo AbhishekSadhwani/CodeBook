@@ -32,7 +32,33 @@ export const FilterProvider = ({children}) => {
         return state.inStockOnly ? products.filter(product => product.in_stock === true) : products;
     };
 
-    const filteredProductsList = isInStock(isbestSeller(state.productsList));
+    const Rating = (products) => {
+        if(state.rating === "4andABOVE"){
+            return products.filter(product => product.rating >= 4);
+        }
+        if(state.rating === "3andABOVE"){
+            return products.filter(product => product.rating >= 3);
+        }
+        if(state.rating === "2andABOVE"){
+            return products.filter(product => product.rating >= 2);
+        }
+        if(state.rating === "1andABOVE"){
+            return products.filter(product => product.rating >= 1);
+        }
+        return products;
+    }
+
+    const Sort = (products) => {
+        if(state.sort === "LowtoHigh"){
+            return products.sort((a,b) => Number(a.price) - Number(b.price));
+        }
+        if(state.sort === "HightoLow"){
+            return products.sort((a,b) => Number(b.price) - Number(a.price));
+        }
+        return products;    
+    }
+
+    const filteredProductsList = Sort(Rating(isInStock(isbestSeller(state.productsList))));
     
     const value = {
         state,

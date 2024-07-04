@@ -1,3 +1,4 @@
+
 export const FilterReducer = (state,action) => {
     const {type,payload} = action;
 
@@ -6,10 +7,10 @@ export const FilterReducer = (state,action) => {
             return {productsList:payload.products}
         
         case "SORT_BY":
-            return
+            return {...state, sort: payload.sort};
         
         case "RATING":
-            return
+            return {...state, rating: payload.rating};
             
         case "BEST_SELLER_ONLY":
             return {...state, bestSellerOnly:payload.bestSellerOnly};
@@ -17,6 +18,15 @@ export const FilterReducer = (state,action) => {
         case "IN_STOCK_ONLY":
             return {...state, inStockOnly:payload.inStockOnly};
         
+        case "CLEAR":
+            return {
+                ...state,
+                bestSellerOnly: false,
+                inStockOnly : false,
+                sort: null,
+                rating:null
+            };
+
         default:
             throw new Error("No case found");
     }
