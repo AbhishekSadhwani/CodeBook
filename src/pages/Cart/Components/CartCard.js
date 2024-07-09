@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { useCart } from '../../../context'
 
 export const CartCard = ({item}) => {
@@ -6,11 +7,15 @@ export const CartCard = ({item}) => {
   return (
     <div className="flex my-10 border-b dark:border-gray-700 p-2 mb-5 dark:text-slate-100">
         <div className='w-32 mr-2'>
+          <Link to={`products/${item.id}`}>
             <img className='rounded-md' src={item.poster} alt="name" />
+          </Link>
         </div>
         <div className='grow text-left dark:text-slate-100'>
+          <Link to={`/products/${item.id}`}>
             <p className='text-lg'>{item.name}</p>
-            <button onClick={() => removeFromCart(item)} className='text-red-400'>Remove</button>
+          </Link>
+          <button onClick={() => removeFromCart(item)} className='text-red-400'>Remove</button>
         </div>
         <p className='text-lg p-2'>${item.price}</p>
         

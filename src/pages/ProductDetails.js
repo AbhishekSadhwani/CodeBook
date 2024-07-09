@@ -55,7 +55,7 @@ export const ProductDetails = () => {
                             <span className="font-semibold text-blue-500 border bg-slate-100 rounded-lg px-3 py-1 mr-2">{product.size} MB</span>
                         </p>
                         <p className="my-3">
-                            { !inCart && <button onClick={() => addToCart(product)} className='flex items-center text-white bg-blue-700 px-5 py-2 text-lg text-center rounded-lg hover:bg-blue-800'>
+                            { !inCart && <button onClick={() => addToCart(product)} className={`flex items-center text-white bg-blue-700 px-5 py-2 text-lg text-center rounded-lg hover:bg-blue-800 ${product.in_stock ? "" : "cursor-not-allowed"}`} disabled={product.in_stock ? "" : "disabled"}>
                                             Add To Cart
                                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="white" className="ml-1 items-center bi bi-plus-lg" viewBox="0 0 16 16">
                                                 <path fillRule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>

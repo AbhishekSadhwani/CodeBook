@@ -1,5 +1,28 @@
+import { useEffect, useState } from "react";
+import { useCart } from "../../../context";
 
 export const Checkout = ({setShowCheckout}) => {
+    const { total } = useCart();
+    const [user, setUser] = useState({});
+    
+
+    useEffect(() => {
+        const token = JSON.parse(sessionStorage.getItem("token"));
+        const cbid = JSON.parse(sessionStorage.getItem("cbid"));
+        
+        async function getUser(){
+            const response = await fetch(`http://localhost:8000/600/users/${cbid}`,{
+                method:"GET",
+                headers:{
+                    "Content-Type":"application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            const data = await response.json();
+            setUser(data);
+        }
+        getUser();
+    },[])
 
     return (
         <section>
@@ -24,11 +47,11 @@ export const Checkout = ({setShowCheckout}) => {
                                 <form className="space-y-6" action="#">
                                     <div>
                                         <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name:</label>
-                                        <input type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Your Name.." required />
+                                        <input type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" value={user.name || "Undefined"} placeholder="Your Name.." disabled required />
                                     </div>
                                     <div>
                                         <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email:</label>
-                                        <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="xyz@example.com" required />
+                                        <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" value={user.email || "xyz@backup.com"} placeholder="xyz@example.com" disabled required />
                                     </div>
                                     <div>
                                         <label htmlFor="card-number" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Card Number:</label>
@@ -46,7 +69,7 @@ export const Checkout = ({setShowCheckout}) => {
                                     </div>
                                     
                                     <div className="text-center">
-                                        <p className="font-semibold text-lime-500 text-2xl">$19</p>
+                                        <p className="font-semibold text-lime-500 text-2xl">${total}</p>
                                     </div>
                                     <button type="submit" className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                         <i className="mr-3 bi bi-lock-fill"></i>

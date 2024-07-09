@@ -34,7 +34,7 @@ export const ProductCard = ({product}) => {
                 </div>
                 <p className='flex items-center justify-between mt-3'>
                     <span className='text-2xl dark:text-gray-100'>${product.price}</span>
-                    {!inCart && <button onClick={() => addToCart(product)} className='flex items-center text-white bg-blue-700 px-3 py-2 text-sm text-center rounded-lg hover:bg-blue-800'>
+                    {!inCart && <button onClick={() => addToCart(product)} className={`flex items-center text-white bg-blue-700 px-3 py-2 text-sm text-center ${product.in_stock ? "" : "cursor-not-allowed"} rounded-lg hover:bg-blue-800`} disabled={product.in_stock ? "" : "disabled"}>
                                     Add To Cart
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" className="ml-1 items-center bi bi-plus-lg" viewBox="0 0 16 16">
                                         <path fillRule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>

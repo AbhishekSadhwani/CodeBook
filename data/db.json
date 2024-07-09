@@ -258,6 +258,12 @@
       "password": "$2a$10$92bCItJYry17mxuDGJYyaOunLLqz5klut5xsColk9/Dzvl2.BOdhe",
       "name": "Abhishek",
       "id": 3
+    },
+    {
+      "email": "alex@gmail.com",
+      "password": "$2a$10$ELp7whEyLvUeBhMMyyPrJuz10luBpCDqPxGuETd9o2VBrXVV3BcOy",
+      "name": "Alex Hales",
+      "id": 4
     }
   ]
 }
