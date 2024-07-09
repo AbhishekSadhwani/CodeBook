@@ -1,7 +1,7 @@
 module.exports = {
   content: ["./src/**/*.{html,js}"],
+  darkMode: "class",
   theme: {
-    dark: "class",
     extend: {},
   },
   plugins: [],

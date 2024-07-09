@@ -1,14 +1,44 @@
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import { useCustomTitle } from "../hooks/useCustomTitle"
 
 export const Register = () => {
+  const navigate = useNavigate();
   // setting custom title
   useCustomTitle("Register");
+
+  // submitting register form
+  async function handleRegister(event){
+    event.preventDefault();
+    const userRegisterData = {
+      name:event.target.name.value,
+      email: event.target.email.value,
+      password: event.target.password.value
+    };
+
+    const requestDetails = {
+      method: "POST",
+      headers: {"content-Type":"application/json"},
+      body: JSON.stringify(userRegisterData)
+    };
+
+    const response = await fetch("http://localhost:8000/register", requestDetails);
+    const data = await response.json();
+    data.accessToken ? navigate("/login") : toast.error(data);
+    
+    if(data.accessToken){
+      sessionStorage.setItem("token",JSON.stringify(data.accessToken));
+      sessionStorage.setItem("cbid",JSON.stringify(data.user.id));
+    }
+
+  }
+
 
   return (
     <main>
       <section>
         <h1 className="text-center m-10 text-2xl text-black underline underline-offset-8 font-semibold dark:text-white" >Register</h1>
-        <form className="mx-auto">
+        <form onSubmit={handleRegister} className="mx-auto">
           <div className="mb-6">
             <label htmlFor="name" className="block mb-2 text-sm text-gray-900 dark:text-gray-300">Your name</label>
             <input type="text" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Abhishek Sadhwani" autoComplete="off" required />
