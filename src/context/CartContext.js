@@ -35,11 +35,23 @@ export const CartProvider = ({children}) => {
         });
     };
 
+    const clearCart = () => {
+        dispatch({
+            type:"CLEAR_CART",
+            payload:{
+                products:[],
+                total:0
+            }
+        })
+    }
+
+
     const value = {
         cartList: state.cartList,
         total: state.total,
         addToCart,
-        removeFromCart
+        removeFromCart,
+        clearCart
     }
 
     return (

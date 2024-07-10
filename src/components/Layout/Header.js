@@ -20,7 +20,7 @@ export const Header = () => {
   // search bar
   const [isHidden, setIsHidden] = useState(true);
 
-  // automatically hide the search bar is page is changed
+  // automatically hide the search bar if page is changed
   const {pathname} = useLocation();
   useEffect(()=> {
     setIsHidden(true);

@@ -18,7 +18,6 @@ export const CartCard = ({item}) => {
           <button onClick={() => removeFromCart(item)} className='text-red-400'>Remove</button>
         </div>
         <p className='text-lg p-2'>${item.price}</p>
-        
     </div>
   )
 }

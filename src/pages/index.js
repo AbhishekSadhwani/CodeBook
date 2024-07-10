@@ -18,6 +18,9 @@ export { ProductDetails } from './ProductDetails';
 export { CartPage } from './Cart/CartPage';
 
 
+// order page
+export { OrderPage } from './Order/OrderPage';
+
 // dashboard
 export { DashboardPage } from './Dashboard/DashboardPage'
 

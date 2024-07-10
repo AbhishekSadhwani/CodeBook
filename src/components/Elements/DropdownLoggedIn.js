@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { json, Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const DropdownLoggedIn = ({showDropdown}) => {
     const [user,setUser] = useState({});
 
-    const navigate = useNavigate();
     const handleLogout = () => {
         sessionStorage.removeItem("id");
         sessionStorage.removeItem("token");

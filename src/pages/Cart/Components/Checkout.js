@@ -1,15 +1,22 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useCart } from "../../../context";
 
 export const Checkout = ({setShowCheckout}) => {
-    const { total } = useCart();
+    // accessing the value of total from context
+    const { cartList, total, clearCart } = useCart();
+
+    const navigate = useNavigate();
+
+    // creating a state for user variable
     const [user, setUser] = useState({});
     
+    // accessing the token and id of the loggedIn user from sessionStorage
+    const token = JSON.parse(sessionStorage.getItem("token"));
+    const cbid = JSON.parse(sessionStorage.getItem("cbid"));
 
+    // accessing the loggedIn user details by sending a fetch request to API so created a async function
     useEffect(() => {
-        const token = JSON.parse(sessionStorage.getItem("token"));
-        const cbid = JSON.parse(sessionStorage.getItem("cbid"));
-        
         async function getUser(){
             const response = await fetch(`http://localhost:8000/600/users/${cbid}`,{
                 method:"GET",
@@ -23,6 +30,42 @@ export const Checkout = ({setShowCheckout}) => {
         }
         getUser();
     },[])
+
+    /* 
+    handle the order when the form is submitted and 
+    because we need to send the details to get save in the orders we create a async function and send a API POST request
+    */
+    async function handleOrder(event){
+        event.preventDefault();
+
+        try{
+            // the data which we send with the fetch request
+            const requestData = {
+                method: "POST",
+                headers: {"Content-Type":"application/json", Authorization:`Bearer ${token}`},
+                body:JSON.stringify({
+                    cartList: cartList,
+                    amount: total,
+                    user:{
+                        name: user.name,
+                        email: user.email,
+                        id: user.id
+                    },
+                    payment_id: `xyz_${Math.floor(Math.random()*100000000)}`
+                })
+            };
+
+            const response = await fetch("http://localhost:8000/660/orders", requestData);
+            const data = await response.json();
+            // function to clearCart when order is successfull
+            clearCart();
+            // navigate to order summary page
+            navigate("/order-summary", {state:{data:data,status:true}});
+        
+        } catch(error){
+            navigate("/order-summary", {state:{status:false}});
+        }
+    } 
 
     return (
         <section>
@@ -44,7 +87,7 @@ export const Checkout = ({setShowCheckout}) => {
                                     CARD PAYMENT
                                 </h3>
                                 {/* Modal body */}
-                                <form className="space-y-6" action="#">
+                                <form onSubmit={handleOrder} className="space-y-6" action="#">
                                     <div>
                                         <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name:</label>
                                         <input type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" value={user.name || "Undefined"} placeholder="Your Name.." disabled required />
