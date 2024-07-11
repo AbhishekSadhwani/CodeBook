@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom"
 import pagenotfoundimg from '../assets/pagenotfound.png';
+import { useCustomTitle } from "../hooks/useCustomTitle";
 
 export const PageNotFound = () => {
+  useCustomTitle("Page Not Found")
   return (
     <main>
       <section>

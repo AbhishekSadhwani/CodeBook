@@ -11,12 +11,12 @@ export const DashboardCard = ({order}) => {
         {order.cartList.map(item => (
             <div key={item.id} className="flex my-7 dark:text-slate-100">
                 <div className='w-32 mr-2'>
-                    <Link to="">
+                    <Link to={`/products/${item.id}`}>
                         <img className='rounded-md' src={item.poster} alt={item.name} />
                     </Link>
                 </div>
                 <div className='grow text-left dark:text-slate-100'>
-                    <Link to="">
+                    <Link to={`/products/${item.id}`}>
                         <p className='text-lg mb-2'>{item.name}</p>
                     </Link>
                     <p className='text-lg'>${item.price}</p>

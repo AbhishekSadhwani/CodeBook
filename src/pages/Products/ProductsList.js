@@ -4,6 +4,8 @@ import { ProductCard } from "../../components";
 import { useSearchParams } from "react-router-dom";
 import { useCustomTitle } from "../../hooks/useCustomTitle";
 import { useFilter } from "../../context/FilterContext";
+import { getProducts } from "../../Services";
+import { toast } from "react-toastify";
 
 export const ProductsList = () => {
   // accessing productlist state and reducer function
@@ -14,10 +16,7 @@ export const ProductsList = () => {
 
   // state for filter show
   const [show, setShow] = useState(false);
-
-//   state for products list
-  // const [products, setProducts] = useState([]);
-
+  
   //accessing search queries
   const [ searchParams ] = useSearchParams();
   const query = searchParams.get("q") ;
@@ -25,10 +24,13 @@ export const ProductsList = () => {
   // fetching products
   useEffect(() => {
     async function fetchProducts(){
-      const response = await fetch(`http://localhost:8000/products?name_like=${query ? query : ""}`);
-      const data = await response.json();
-      initialProductsList(data);
-    }
+      try{
+        const data = await getProducts(query);
+        initialProductsList(data);
+      }catch(error){
+        toast.error(error.message,{position: "bottom-center",autoClose:3000});
+      }
+    };
     fetchProducts();
   },[query])
 

@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCustomTitle } from "../hooks/useCustomTitle"
 import { toast } from "react-toastify";
+import { login } from "../Services";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -10,25 +11,16 @@ export const Login = () => {
 
   async function handleLogin(event) {
     event.preventDefault();
-
-    const loginData = {
-      email: email.current.value,
-      password: password.current.value,
-    };
-  
-    const requestData = {
-      method: "POST",
-      headers: {"content-Type": "application/json"},
-      body: JSON.stringify(loginData)
-    };
-
-    const response = await fetch("http://localhost:8000/login", requestData);
-    const data = await response.json();
-    data.accessToken ? navigate('/products') : toast.error(data);
-
-    if(data.accessToken){
-      sessionStorage.setItem("token",JSON.stringify(data.accessToken));
-      sessionStorage.setItem("cbid",JSON.stringify(data.user.id));
+    try{
+      const loginData = {
+        email: email.current.value,
+        password: password.current.value,
+      };
+      
+      const data = await login(loginData);
+      data.accessToken ? navigate('/products') : toast.error(data);
+    }catch(error){
+      toast.error(error.message,{position: "bottom-center",autoClose:3000})
     }
 
   };

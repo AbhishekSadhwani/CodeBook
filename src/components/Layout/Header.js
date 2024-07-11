@@ -26,6 +26,12 @@ export const Header = () => {
     setIsHidden(true);
   },[pathname])
   
+  // automatically close the dropdown when the path is changed
+  useEffect(()=> {
+      setShowDropdown(false);
+  },[pathname])
+
+
   // handling the darkTheme
   useEffect((() =>{
     localStorage.setItem("darkTheme", JSON.stringify(darkTheme));
@@ -37,7 +43,6 @@ export const Header = () => {
     }
 
   }),[darkTheme])
-
 
 
   return (

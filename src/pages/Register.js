@@ -1,6 +1,7 @@
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useCustomTitle } from "../hooks/useCustomTitle"
+import { register } from "../Services";
 
 export const Register = () => {
   const navigate = useNavigate();
@@ -10,28 +11,19 @@ export const Register = () => {
   // submitting register form
   async function handleRegister(event){
     event.preventDefault();
-    const userRegisterData = {
-      name:event.target.name.value,
-      email: event.target.email.value,
-      password: event.target.password.value
-    };
+    try{
+      const userRegisterData = {
+        name:event.target.name.value,
+        email: event.target.email.value,
+        password: event.target.password.value
+      };
 
-    const requestDetails = {
-      method: "POST",
-      headers: {"content-Type":"application/json"},
-      body: JSON.stringify(userRegisterData)
-    };
-
-    const response = await fetch("http://localhost:8000/register", requestDetails);
-    const data = await response.json();
-    data.accessToken ? navigate("/login") : toast.error(data);
-    
-    if(data.accessToken){
-      sessionStorage.setItem("token",JSON.stringify(data.accessToken));
-      sessionStorage.setItem("cbid",JSON.stringify(data.user.id));
+      const data = await register(userRegisterData);
+      data.accessToken ? navigate("/") : toast.error(data);
+    }catch(error){
+      toast.error(error.message,{position: "bottom-center",autoClose:3000})
     }
-
-  }
+  };
 
 
   return (

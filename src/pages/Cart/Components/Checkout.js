@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../../../context";
+import { getUser, createOrder } from "../../../Services";
+import { toast } from "react-toastify";
 
 export const Checkout = ({setShowCheckout}) => {
     // accessing the value of total from context
@@ -11,24 +13,17 @@ export const Checkout = ({setShowCheckout}) => {
     // creating a state for user variable
     const [user, setUser] = useState({});
     
-    // accessing the token and id of the loggedIn user from sessionStorage
-    const token = JSON.parse(sessionStorage.getItem("token"));
-    const cbid = JSON.parse(sessionStorage.getItem("cbid"));
-
     // accessing the loggedIn user details by sending a fetch request to API so created a async function
     useEffect(() => {
-        async function getUser(){
-            const response = await fetch(`http://localhost:8000/600/users/${cbid}`,{
-                method:"GET",
-                headers:{
-                    "Content-Type":"application/json",
-                    Authorization: `Bearer ${token}`
-                }
-            })
-            const data = await response.json();
-            setUser(data);
+        async function fetchUser(){
+            try{
+                const data = await getUser();
+                setUser(data);
+            }catch(error){
+                toast.error(error.message,{position: "bottom-center",autoClose:3000});
+            }
         }
-        getUser();
+        fetchUser();
     },[])
 
     /* 
@@ -37,26 +32,8 @@ export const Checkout = ({setShowCheckout}) => {
     */
     async function handleOrder(event){
         event.preventDefault();
-
         try{
-            // the data which we send with the fetch request
-            const requestData = {
-                method: "POST",
-                headers: {"Content-Type":"application/json", Authorization:`Bearer ${token}`},
-                body:JSON.stringify({
-                    cartList: cartList,
-                    amount: total,
-                    user:{
-                        name: user.name,
-                        email: user.email,
-                        id: user.id
-                    },
-                    payment_id: `xyz_${Math.floor(Math.random()*100000000)}`
-                })
-            };
-
-            const response = await fetch("http://localhost:8000/660/orders", requestData);
-            const data = await response.json();
+            const data = await createOrder(cartList, total, user);
             // function to clearCart when order is successfull
             clearCart();
             // navigate to order summary page

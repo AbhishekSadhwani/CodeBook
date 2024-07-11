@@ -3,18 +3,25 @@ import { useParams } from "react-router-dom"
 import { Rating } from '../components/Elements/Rating';
 import { useCustomTitle } from "../hooks/useCustomTitle";
 import { useCart } from "../context";
+import { getProductDetails } from "../Services";
+import { toast } from "react-toastify";
 
 export const ProductDetails = () => {
+    // catching the id passed in the url to fetch details of the product using the id
     const { id } = useParams();
+    // creating a state list for holding the products
     const [product, setProduct] = useState({});
     const { cartList, addToCart, removeFromCart } = useCart();
     const [inCart, setInCart] = useState();
 
     useEffect(() => {
         async function fetchProduct() {
-            const response = await fetch(`http://localhost:8000/products/${id}`);
-            const data = await response.json();
-            setProduct(data);
+            try{
+                const data = await getProductDetails(id);
+                setProduct(data);
+            }catch(error){
+                toast.error(error.message,{position: "bottom-center",autoClose:3000});
+            }           
         }
         fetchProduct();
     },[id])

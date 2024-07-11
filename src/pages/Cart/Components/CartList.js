@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { CartCard } from "./CartCard";
 import { Checkout } from "./Checkout";
 import { useCart } from "../../../context";
