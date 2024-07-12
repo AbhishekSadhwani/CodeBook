@@ -10,7 +10,8 @@ export async function login(loginData){
 
   const response = await fetch(`${process.env.REACT_APP_HOST}/login`, requestData);
   if(!response.ok){
-    throw {message:response.statusText, status:response.status}; // eslint-disable-line
+    const errorMessage = {message:response.statusText, status:response.status};
+    throw errorMessage;
   }
     
   const data = await response.json();
@@ -34,7 +35,8 @@ export async function register(userRegisterData){
 
   const response = await fetch(`${process.env.REACT_APP_HOST}/register`, requestDetails);
   if(!response.ok){
-    throw {message:response.statusText, status:response.status}; // eslint-disable-line
+    const errorMessage = {message:response.statusText, status:response.status};
+    throw errorMessage;
   }
   const data = await response.json();
   

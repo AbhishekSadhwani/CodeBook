@@ -15,13 +15,12 @@ export const Login = () => {
   // function to handle user login using the login function from authService for API call
   async function handleLogin(event) {
     event.preventDefault();
+    const loginData = {
+      // accessing ref values from login form
+      email: email.current.value,
+      password: password.current.value,
+    };
     try{
-      const loginData = {
-        // accessing ref values from login form
-        email: email.current.value,
-        password: password.current.value,
-      };
-      
       const data = await login(loginData);
       data.accessToken ? navigate('/products') : toast.error(data);
     }catch(error){
@@ -30,6 +29,26 @@ export const Login = () => {
 
   };
   
+  async function handleGuestLogin() {
+    email.current.value = process.env.REACT_APP_GUEST_EMAIL;
+    password.current.value = process.env.REACT_APP_GUEST_PASSWORD;
+
+    const loginData = {
+      email: email.current.value,
+      password: password.current.value,
+    };
+    console.log(loginData)
+
+    try{
+      const data = await login(loginData);
+      data.accessToken ? navigate('/products') : toast.error(data);
+    }catch(error){
+      toast.error(error.message,{position: "bottom-center",autoClose:3000})
+    }
+
+  };
+
+
   // setting custom title
   useCustomTitle("Login");
 
@@ -48,9 +67,9 @@ export const Login = () => {
           </div>
           <div className="flex flex-col items-start gap-3 mb-5">
             <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Log In</button>
-            <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login As Guest</button>    
           </div>
         </form>
+        <button onClick={handleGuestLogin} type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login As Guest</button>    
       </section>
     </main>
   )
