@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 
+// component to display user orders on dashboard page 
 export const DashboardCard = ({order}) => {
   return (
     <section className='max-w-4xl mx-auto border dark:border-gray-700 p-4 my-10'>
@@ -7,7 +8,7 @@ export const DashboardCard = ({order}) => {
             <p>Order Id:{order.id}</p>
             <p>Total: ${order.amount}</p>
         </div>
-        {/* traverse over the carlist in the order */}
+        {/* traverse over the carlist in the order so we will have the total items which were ordered in the particular order */}
         {order.cartList.map(item => (
             <div key={item.id} className="flex my-7 dark:text-slate-100">
                 <div className='w-32 mr-2'>

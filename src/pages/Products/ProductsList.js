@@ -1,27 +1,32 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
+
 import { FilterBar } from "./components/FilterBar";
 import { ProductCard } from "../../components";
-import { useSearchParams } from "react-router-dom";
-import { useCustomTitle } from "../../hooks/useCustomTitle";
+
+
 import { useFilter } from "../../context/FilterContext";
+import { useCustomTitle } from "../../hooks/useCustomTitle";
 import { getProducts } from "../../Services";
-import { toast } from "react-toastify";
+
+
 
 export const ProductsList = () => {
   // accessing productlist state and reducer function
   const { productsList ,initialProductsList } = useFilter();
 
-  // set custom title
+  // set custom title using hook
   useCustomTitle("Explore eBook Collection");
 
-  // state for filter show
+  // state to toggle filter component
   const [show, setShow] = useState(false);
   
   //accessing search queries
   const [ searchParams ] = useSearchParams();
   const query = searchParams.get("q") ;
   
-  // fetching products
+  // fetching products using the getProducts function from productsServices for API call
   useEffect(() => {
     async function fetchProducts(){
       try{
@@ -32,7 +37,7 @@ export const ProductsList = () => {
       }
     };
     fetchProducts();
-  },[query])
+  },[query]) // eslint-disable-line
 
   return (
     <main>
@@ -48,7 +53,7 @@ export const ProductsList = () => {
           </span>
         </div>
         <div className="flex flex-wrap justify-center lg:flex-row">
-          {/* iterating over product array */}
+          {/* iterating over product array and rendering productCards */}
           {productsList && productsList.map(product => (
             <ProductCard key={product.id} product = {product} />
           ))}

@@ -1,5 +1,6 @@
-import { useState } from "react"
+import { useState } from "react";
 
+// component for rendering each faq in the list
 export const FaqCard = ({faq}) => {
     const [show, setShow] = useState(false);
 

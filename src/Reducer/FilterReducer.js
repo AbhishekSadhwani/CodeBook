@@ -1,7 +1,9 @@
+// reducer component to be used in context
 
 export const FilterReducer = (state,action) => {
     const {type,payload} = action;
 
+    // defining different type of reducer function to be called, and handling them using switch
     switch(type){
         case "PRODUCT_LIST":
             return {productsList:payload.products}

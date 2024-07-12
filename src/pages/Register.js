@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { useCustomTitle } from "../hooks/useCustomTitle"
 import { register } from "../Services";
 
+// register component 
 export const Register = () => {
   const navigate = useNavigate();
   // setting custom title
   useCustomTitle("Register");
 
-  // submitting register form
+  // submitting register form and using register function from authServices for API call
   async function handleRegister(event){
     event.preventDefault();
     try{

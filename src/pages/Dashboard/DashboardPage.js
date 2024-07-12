@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { EmptyDashboard } from './components/EmptyDashboard'
 import { DashboardCard } from './components/DashboardCard'
 import { useCustomTitle } from '../../hooks/useCustomTitle';
@@ -6,8 +6,13 @@ import { getUserOrders } from '../../Services/DataServices';
 import { toast } from 'react-toastify';
 
 export const DashboardPage = () => {
+  // state variable to store the order list fetched using api request
   const [orders, setOrders] = useState([]);
 
+  /*
+  using useEffect to run the async function to get the data everytime the dashboard page is loaded
+  using the getUserOrders function from DataServices for Api call
+  */
   useEffect(() => {
     async function getOrders(){
       try{
@@ -30,6 +35,7 @@ export const DashboardPage = () => {
         <h1>My Dashboard</h1>
       </section>
       <section>
+        {/* traversing over order list */}
         {orders.length > 0 && orders.map(order => (
           <DashboardCard key={order.id} order={order} />
         ))}

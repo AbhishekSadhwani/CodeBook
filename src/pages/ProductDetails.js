@@ -12,8 +12,11 @@ export const ProductDetails = () => {
     // creating a state list for holding the products
     const [product, setProduct] = useState({});
     const { cartList, addToCart, removeFromCart } = useCart();
+
+    // using a state variable to monitor if product is in cart or not
     const [inCart, setInCart] = useState();
 
+    // fetching productDetails using getproductDetails function from ProductServices for API call
     useEffect(() => {
         async function fetchProduct() {
             try{

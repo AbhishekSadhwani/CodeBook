@@ -12,6 +12,7 @@ export const CartPage = () => {
 
   return (
     <main>
+      {/* based on cartList length we render CartList or EmptyCart componenets */}
       {cartList.length ? <CartList /> : <EmptyCart />}
     </main>
   )

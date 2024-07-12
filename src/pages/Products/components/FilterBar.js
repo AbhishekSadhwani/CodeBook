@@ -1,7 +1,8 @@
-import { useFilter } from "../../../context"
+import { useFilter } from "../../../context";
 
+// filter component for products page
 export const FilterBar = ({setShow}) => {
-  
+  // accessing the state and dispatch from filter context to set function in different filters and set state values
   const { state, dispatch } = useFilter();
 
   return (
@@ -16,6 +17,7 @@ export const FilterBar = ({setShow}) => {
         <div className="border-b border-gray-300 pb-3"></div>
         <div className="py-4 overflow-y-auto">
           <ul className="text-slate-700 dark:text-slate-100">
+            {/* sort by */}
             <li className="mt-1 mb-5">
                 <p className="font-semibold my-1">Sort by</p>
                 <div className="flex items-center my-1">
@@ -27,6 +29,7 @@ export const FilterBar = ({setShow}) => {
                   <label htmlFor="price-radio-2" className="ml-2 text-sm text-gray-900 dark:text-gray-300">Price - High to Low</label>
                 </div>
             </li>
+            {/* rating */}
             <li className="mt-1 mb-5">
                 <p className="font-semibold my-1">Rating</p>
                 <div className="flex items-center my-1">
@@ -46,6 +49,7 @@ export const FilterBar = ({setShow}) => {
                   <label htmlFor="rating-4" className="ml-2 text-sm text-gray-900 dark:text-gray-300">1 Stars & Above</label>
                 </div>
             </li>
+            {/* best_seller and in_stock */}
             <li className="mt-1 mb-5">
                 <p className="font-semibold my-1">Other Filters</p>
                 <div className="flex items-center my-1">
@@ -57,6 +61,7 @@ export const FilterBar = ({setShow}) => {
                   <label htmlFor="other-filter-2" className="ml-2 text-sm text-gray-900 dark:text-gray-300">INSTOCK Only</label>
                 </div>
             </li>
+            {/* clear filters */}
             <li className="mt-1 ml-1">
               <button onClick={() => dispatch({type:"CLEAR"})} className="text-sm text-slate-900 border border-gray-300 px-10 py-2.5 rounded-lg focus:outline-none focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 dark:focus:ring-gray-700 dark:text-slate-200 dark:border-gray-600 dark:hover:bg-gray-700">Clear Filter</button>
             </li>

@@ -1,7 +1,8 @@
-
+// cart reducer component
 export const CartReducer = (state,action) => {
     const {type, payload} = action;
 
+    // handling different reducer function using a switch
     switch(type){
         case "ADD_TO_CART":
             return {...state, cartList: payload.products, total: payload.total};

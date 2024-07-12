@@ -3,9 +3,10 @@ import { CartCard } from "./CartCard";
 import { Checkout } from "./Checkout";
 import { useCart } from "../../../context";
 
-
 export const CartList = () => {
     const { cartList, total } = useCart();
+
+    // state variable to toggle the checkout modal when placeorder is clicked
     const [showCheckout, setShowCheckout] = useState(false);
 
     return (
@@ -15,6 +16,7 @@ export const CartList = () => {
                     My Cart ({cartList.length})
                 </p>
             </section>
+            {/* traversing over cartList array and creating cartCard for each item in cartList */}
             <section className="max-w-4xl mx-auto">
                 {cartList.map(item => (
                     <CartCard key={item.id} item = {item} />

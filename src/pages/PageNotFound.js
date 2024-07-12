@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import pagenotfoundimg from '../assets/pagenotfound.png';
 import { useCustomTitle } from "../hooks/useCustomTitle";
 
+// component to render page not found if some random page is visited
 export const PageNotFound = () => {
   useCustomTitle("Page Not Found")
   return (

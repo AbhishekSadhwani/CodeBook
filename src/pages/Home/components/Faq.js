@@ -1,5 +1,6 @@
-import { FaqCard } from "./FaqCard"
+import { FaqCard } from "./FaqCard";
 
+// faq component for home page
 export const Faq = () => {
   
   const faqs = [
@@ -13,6 +14,7 @@ export const Faq = () => {
     <section className="border dark:border-gray-700 rounded py-7 px-7 mb-10">
       <h1 className="text-center font-semibold text-black text-2xl underline underline-offset-8 dark:text-white">Question in mind?</h1>
       <div className="mt-4">
+        {/* created a faq's list, traversing over it and  creating FaqCard */}
         { faqs && faqs.map((faq) => (
           < FaqCard key={faq.id} faq={faq} />
         ))}

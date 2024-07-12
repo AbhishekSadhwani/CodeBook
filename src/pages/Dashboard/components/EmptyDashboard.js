@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-
+// component to show empty Dashboard
 export const EmptyDashboard = () => {
     return (
         <section className="text-xl text-center max-w-4xl mx-auto my-10 py-5 dark:text-slate-100 border dark:border-slate-700 rounded">

@@ -1,3 +1,4 @@
+// testimonial component for home page
 export const Testimonial = () => {
     return (
       <section className="my-20">

@@ -5,14 +5,19 @@ import { toast } from "react-toastify";
 import { login } from "../Services";
 
 export const Login = () => {
+  // using useNavigate to access the navigate functionality
   const navigate = useNavigate();
+
+  // creating email and password reference variables using useRef hook 
   const email = useRef();
   const password = useRef();
 
+  // function to handle user login using the login function from authService for API call
   async function handleLogin(event) {
     event.preventDefault();
     try{
       const loginData = {
+        // accessing ref values from login form
         email: email.current.value,
         password: password.current.value,
       };
@@ -25,11 +30,9 @@ export const Login = () => {
 
   };
   
-
   // setting custom title
   useCustomTitle("Login");
 
-  
   return (
     <main>
       <section>

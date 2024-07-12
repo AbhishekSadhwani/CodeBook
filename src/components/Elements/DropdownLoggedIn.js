@@ -1,32 +1,28 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { logout } from "../../Services";
+import { toast } from "react-toastify";
+import { getUser, logout } from "../../Services";
 
 export const DropdownLoggedIn = ({showDropdown}) => {
     const [user,setUser] = useState({});
 
+    // handling logging out using the logout function from Services
     const handleLogout = () => {
         logout();
     };
 
+    // fetching user details to show user email in dropdown
     useEffect(() => {
-        const token = JSON.parse(sessionStorage.getItem("token"));
-        const cbid  = JSON.parse(sessionStorage.getItem("cbid"));
-
-        async function getUser(){
-            const response = await fetch(`http://localhost:8000/600/users/${cbid}`,{
-                method:"GET",
-                headers:{
-                    "Content-Type":"application/json",
-                    Authorization: `Bearer ${token}`
-                }
-            })
-            const data = await response.json();
+        async function fetchUser(){
+            try{
+                const data = await getUser();
             setUser(data);
+            }catch(error){
+                toast.error(error.message,{position: "bottom-center",autoClose:3000})
+            }
         }
-        getUser();
+        fetchUser();
     },[]);
-
 
     return (
         <div id="dropdownInformation" className={`${showDropdown ? "" : "hidden" } absolute top-11 right-0 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600`}>

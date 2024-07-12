@@ -4,9 +4,10 @@ import { getFeaturedProducts } from "../../../Services";
 import { toast } from "react-toastify";
 
 export const FeaturedProducts = () => {
+  // creating a products state to hold the products received from API call
   const [products, setProducts] = useState([]);
 
-  // fetching feature products using the productservices function
+  // fetching feature products using the productservices function getFeaturedProducts for the API call
   useEffect(() => {
     async function fetchProducts(){
       try{

@@ -7,7 +7,6 @@ export { Register } from './Register';
 // homepage
 export { HomePage } from './Home/HomePage';
 
-
 // prouducts page
 export { ProductsList } from './Products/ProductsList';
 
@@ -16,7 +15,6 @@ export { ProductDetails } from './ProductDetails';
 
 // carts page
 export { CartPage } from './Cart/CartPage';
-
 
 // order page
 export { OrderPage } from './Order/OrderPage';

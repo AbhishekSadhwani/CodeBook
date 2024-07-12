@@ -2,7 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { useCart } from '../../../context'
 
+// Card to show products in card
 export const CartCard = ({item}) => {
+  // accessing removefromcart function to add the functionality to remove button
   const { removeFromCart } = useCart();
   return (
     <div className="flex my-10 border-b dark:border-gray-700 p-2 mb-5 dark:text-slate-100">

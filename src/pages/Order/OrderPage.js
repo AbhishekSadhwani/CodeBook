@@ -4,8 +4,10 @@ import { OrderSuccess } from './components/OrderSuccess';
 import { useCustomTitle } from '../../hooks/useCustomTitle';
 
 export const OrderPage = () => {
+  // accessing the state using the useLocation
   const { state } = useLocation();
-
+  
+  // setting custom title using the hook
   useCustomTitle("Order Summary");
 
   return (
@@ -14,7 +16,6 @@ export const OrderPage = () => {
         /* checking the state for order status if it's true then we will render 
         ordersuccess components otherwise orderfail component */
       }
-
       {state.status ?  <OrderSuccess data={state.data} /> : <OrderFail />}
     </main>
   )

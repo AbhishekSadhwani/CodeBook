@@ -8,16 +8,18 @@ import logo from '../../assets/logo1.png';
 
 export const Header = () => {
   
+  // accessing carList from context for showing number of items in cart over cart icon
   const { cartList } = useCart();
 
+  // access token from session, based on token we will decide to show logged in dropdown or logged out dropdown
   const token = JSON.parse(sessionStorage.getItem("token"));
 
-  // show dropdown
+  // creating a state varaible to monitor weather to show dropdown or not
   const [showDropdown, setShowDropdown] = useState(false);
 
-  // darkTheme
+  // state variable to monitor darkTheme
   const [ darkTheme, setDarkTheme ] = useState(JSON.parse(localStorage.getItem("darkTheme")) || false);
-  // search bar
+  // state variable to monitor search bar
   const [isHidden, setIsHidden] = useState(true);
 
   // automatically hide the search bar if page is changed

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import heroImage from '../../../assets/hero_image.png';
 
+// hero component for home page
 export const Hero = () => {
   return (
     <section className="flex flex-col lg:flex-row items-center">

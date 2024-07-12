@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 export const Search = ({setIsHidden}) => {
     const navigate = useNavigate();
 
-    // function to handle the form submit
+    // function to handle the form submit and navigate back with the query to product page
     const handleForm = (event) => {
         event.preventDefault();
         navigate(`/products?q=${event.target.search.value}`);

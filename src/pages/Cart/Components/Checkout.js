@@ -13,7 +13,7 @@ export const Checkout = ({setShowCheckout}) => {
     // creating a state for user variable
     const [user, setUser] = useState({});
     
-    // accessing the loggedIn user details by sending a fetch request to API so created a async function
+    // accessing the loggedIn user details by using the getUser function from authServices
     useEffect(() => {
         async function fetchUser(){
             try{
@@ -28,7 +28,7 @@ export const Checkout = ({setShowCheckout}) => {
 
     /* 
     handle the order when the form is submitted and 
-    because we need to send the details to get save in the orders we create a async function and send a API POST request
+    because we need to send the details to get saved in the orders we create a async function and call the createOrder function from DataServices
     */
     async function handleOrder(event){
         event.preventDefault();
@@ -36,10 +36,11 @@ export const Checkout = ({setShowCheckout}) => {
             const data = await createOrder(cartList, total, user);
             // function to clearCart when order is successfull
             clearCart();
-            // navigate to order summary page
+            // navigate to order summary page with data and status as true
             navigate("/order-summary", {state:{data:data,status:true}});
         
         } catch(error){
+            // if any error occurs then we pass the status as false because based on this status order-summary page will render components
             navigate("/order-summary", {state:{status:false}});
         }
     } 

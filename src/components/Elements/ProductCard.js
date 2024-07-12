@@ -5,9 +5,16 @@ import { useCart } from '../../context';
 import backupimage from '../../assets/hero_image.png';
 
 export const ProductCard = ({product}) => {
+    // accessing cartList, addToCart and removeFromCart functions from cartContext
     const { cartList, addToCart, removeFromCart } = useCart();
+
+    // creating a state variable to keep track if the product is in cart or not
     const [inCart, setInCart] = useState(false);
 
+    /*
+    using useEffect to keep checking if the product passed is in cart or not,
+    since cartList and id are passed as depedency the useEffect will run every time there is change in them
+    */
     useEffect(() => {
         const productInCart = cartList.find(item => item.id === product.id);
 
@@ -34,6 +41,7 @@ export const ProductCard = ({product}) => {
                 </div>
                 <p className='flex items-center justify-between mt-3'>
                     <span className='text-2xl dark:text-gray-100'>${product.price}</span>
+                    {/* if product not in cart showing the add to cart button */}
                     {!inCart && <button onClick={() => addToCart(product)} className={`flex items-center text-white bg-blue-700 px-3 py-2 text-sm text-center ${product.in_stock ? "" : "cursor-not-allowed"} rounded-lg hover:bg-blue-800`} disabled={product.in_stock ? "" : "disabled"}>
                                     Add To Cart
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" className="ml-1 items-center bi bi-plus-lg" viewBox="0 0 16 16">
@@ -41,6 +49,7 @@ export const ProductCard = ({product}) => {
                                     </svg>
                                 </button>
                     }
+                    {/* if in cart showing the remove button */}
                     {inCart && <button onClick={() => removeFromCart(product)} className='flex items-center text-white bg-red-600 px-3 py-2 text-sm text-center rounded-lg hover:bg-red-800'>
                                     Remove Item
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="ml-1 bi bi-trash3" viewBox="0 0 16 16">
@@ -48,10 +57,8 @@ export const ProductCard = ({product}) => {
                                     </svg>
                                 </button> 
                     }
-
                 </p>
             </div>
         </div>
-
     )
-    }
+}
