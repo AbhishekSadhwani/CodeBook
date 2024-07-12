@@ -2,7 +2,7 @@
 export const CartReducer = (state,action) => {
     const {type, payload} = action;
 
-    // handling different reducer function using a switch
+    // handling different reducer function using switch
     switch(type){
         case "ADD_TO_CART":
             return {...state, cartList: payload.products, total: payload.total};
