@@ -278,10 +278,10 @@
   ],
   "users": [
     {
-      "email": "abhi@example.com",
-      "password": "$2a$10$QFx3plDTpFLYaa3Q5ZNhJuL3bJzm6GorP4GFGRsIg4U/T8ZVSkuJG",
+      "email": "abhishek@example.com",
+      "password": "$2a$10$Tz2rmbcX5mWJOfEwREvoEebqj/O2in5a05VGAvvTSXw/Xa0KhgMJq",
       "name": "Abhishek Sadhwani",
-      "id": 1
+      "id": 2
     }
   ]
 }
