@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import heroImage from '../../../assets/hero_image.png';
+import heroImage from '../../../assets/hero.jpg';
 
 // hero component for home page
 export const Hero = () => {
