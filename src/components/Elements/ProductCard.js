@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Rating } from './Rating';
 import { useCart } from '../../context';
-import backupimage from '../../assets/hero_image.png';
+import backupimage from '../../assets/hero.jpg';
 
 export const ProductCard = ({product}) => {
     // accessing cartList, addToCart and removeFromCart functions from cartContext
