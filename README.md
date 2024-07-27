@@ -12,9 +12,11 @@ CodeBook is an eBook shop built with ReactJS, featuring the sleek styling of Tai
 
 ![App Screenshot](https://github.com/sadhwaniabhi/Project-Readme-Resources/blob/main/Codebook/Images/Screenshot%202024-07-27%20211655.png)
 
-![App Screenshot](https://github.com/sadhwaniabhi/Project-Readme-Resources/blob/main/Codebook/Images/Screenshot%202024-07-27%20211655.png)
+![App Screenshot](https://github.com/sadhwaniabhi/Project-Readme-Resources/blob/main/Codebook/Images/Screenshot%202024-07-27%20223410.png)
 
-![App Screenshot](https://github.com/sadhwaniabhi/Project-Readme-Resources/blob/main/Codebook/Images/Screenshot%202024-07-27%20211655.png)
+![App Screenshot](https://github.com/sadhwaniabhi/Project-Readme-Resources/blob/main/Codebook/Images/Screenshot%202024-07-27%20223423.png)
+
+![App Screenshot](https://github.com/sadhwaniabhi/Project-Readme-Resources/blob/main/Codebook/Images/Screenshot%202024-07-27%20223433.png)
 
 ## Demo
 
