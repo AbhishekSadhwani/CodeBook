@@ -23,7 +23,7 @@ export const CartList = () => {
                 ))} 
             </section>
             <section className="max-w-4xl mx-auto">
-                <div className=" flex flex-col text-lg p-2 border-b border-gray-700 dark:text-slate-100">
+                <div className=" flex flex-col text-lg p-2 border-b border-gray-200 dark:border-gray-700 dark:text-slate-100">
                     <p className="flex justify-between my-2">
                         <span className="font-semibold">Total Amount:</span>
                         <span>${total}</span>
